@@ -29,6 +29,16 @@
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
+            <div class="mt-4">
+                <x-label for="community_id" :value="__('Topluluk Seçin')" />
+                <select id="community_id" name="community_id" class="block mt-1 w-full">
+                    <option value="">Bir topluluk seçin</option>
+                    @foreach (\App\Models\Community::all() as $community)
+                        <option value="{{ $community->id }}">{{ $community->name }}</option>
+                    @endforeach
+                </select>
+
+            </div>
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
                 <div class="mt-4">
                     <x-label for="terms">
