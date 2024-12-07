@@ -30,6 +30,7 @@ class User extends Authenticatable
         'email',
         'password',
         'community_id',
+        'role',
     ];
 
     /**
@@ -65,4 +66,5 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
 }

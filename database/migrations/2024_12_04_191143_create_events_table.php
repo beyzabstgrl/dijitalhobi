@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('title'); // Etkinlik başlığı
             $table->text('description')->nullable(); // Etkinlik açıklaması
             $table->dateTime('event_date'); // Etkinlik tarihi
-            $table->string('location')->nullable(); // Etkinlik yeri
+            $table->string('location')->nullable();// Etkinlik yeri
+            $table->string('image')->nullable();
             $table->timestamps();
             $table->foreign('community_id')->references('id')->on('communities');
         });

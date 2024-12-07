@@ -16,15 +16,29 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Ana Sayfa</a></li>
                 <li class="nav-item"><a class="nav-link" href="/communities">Topluluklar</a></li>
                 <li class="nav-item"><a class="nav-link" href="/events">Etkinlikler</a></li>
                 <li class="nav-item"><a class="nav-link" href="/profile">Profil</a></li>
             </ul>
+            <ul class="navbar-nav">
+                @auth
+                    <li class="nav-item">
+                        <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-link nav-link">Çıkış Yap</button>
+                        </form>
+                    </li>
+                @else
+                    <li class="nav-item"><a class="nav-link" href="/login">Giriş Yap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register">Kayıt Ol</a></li>
+                @endauth
+            </ul>
         </div>
     </div>
 </nav>
+
 
 <!-- Content -->
 <div class="container mt-4">
