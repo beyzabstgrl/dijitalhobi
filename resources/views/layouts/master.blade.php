@@ -17,7 +17,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="/">Ana Sayfa</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('communities.index') }}">Ana Sayfa</a></li>
                 <li class="nav-item"><a class="nav-link" href="/communities">Topluluklar</a></li>
                 <li class="nav-item"><a class="nav-link" href="/events">Etkinlikler</a></li>
                 <li class="nav-item"><a class="nav-link" href="/profile">Profil</a></li>
@@ -55,5 +55,6 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
