@@ -27,31 +27,46 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'community_id' => 'required|exists:communities,id', // Topluluk doğrulama
-            'title' => 'required|max:255',
-            'description' => 'nullable',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
             'event_date' => 'required|date',
-            'location' => 'nullable|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Görsel doğrulama
+            'location' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $imagePath = null;
+        try {
+            $imagePath = null;
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('events', 'public'); // Görseli kaydet
+            if ($request->hasFile('image')) {
+                // Görseli public klasörüne kaydet
+                $imageName = time() . '_' . $request->file('image')->getClientOriginalName();
+                $request->file('image')->move(public_path('events'), $imageName);
+                $imagePath = 'events/' . $imageName; // Görselin yolu
+            }
+
+            // Etkinlik oluştur
+            Event::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'event_date' => $request->event_date,
+                'location' => $request->location,
+                'community_id' => auth()->user()->community_id,
+                'image' => $imagePath,
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Etkinlik başarıyla oluşturuldu!',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Etkinlik oluşturulurken bir hata oluştu!',
+            ]);
         }
-
-        Event::create([
-            'community_id' => $request->community_id, // Kullanıcının seçtiği topluluk
-            'title' => $request->title,
-            'description' => $request->description,
-            'event_date' => $request->event_date,
-            'location' => $request->location,
-            'image' => $imagePath,
-        ]);
-
-        return redirect()->route('events.index')->with('success', 'Etkinlik başarıyla oluşturuldu.');
     }
+
+
 
 
 }

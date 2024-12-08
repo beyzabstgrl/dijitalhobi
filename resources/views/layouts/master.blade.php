@@ -19,8 +19,13 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link" href="{{ route('communities.index') }}">Ana Sayfa</a></li>
                 <li class="nav-item"><a class="nav-link" href="/communities">Topluluklar</a></li>
-                <li class="nav-item"><a class="nav-link" href="/events">Etkinlikler</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('events.index') }}">Etkinlikler</a></li>
                 <li class="nav-item"><a class="nav-link" href="/profile">Profil</a></li>
+                @if(auth()->check() && auth()->user()->role === 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.users.index') }}">Kullanıcılar</a>
+                    </li>
+                @endif
             </ul>
             <ul class="navbar-nav">
                 @auth
@@ -52,6 +57,8 @@
         <span>&copy; 2024 Hobi Platformu. Tüm Hakları Saklıdır.</span>
     </div>
 </footer>
+
+@yield('scripts')
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

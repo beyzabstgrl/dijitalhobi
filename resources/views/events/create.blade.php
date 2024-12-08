@@ -37,3 +37,24 @@
         </form>
     </div>
 @endsection
+@section('scripts')
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Başarılı!',
+                text: '{{ session('success') }}',
+            });
+        </script>
+    @endif
+
+    @if(session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Hata!',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
+@endsection

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('community_id')->constrained('communities')->onDelete('cascade'); // Topluluk ID'si
+            $table->foreignId('event_id')->constrained('events')->onDelete('cascade'); // Topluluk ID'si
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Gönderiyi oluşturan kullanıcı
             $table->text('content');
             $table->timestamps();
