@@ -11,7 +11,7 @@
             <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addCommunityModal">
                 Yeni Topluluk Ekle
             </button>
-        @endif>
+        @endif
 
         <!-- Topluluk Listesi -->
         <div class="row">
